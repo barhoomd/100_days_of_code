@@ -27,7 +27,7 @@ This will install the packages from the requirements.txt for this project.
 '''
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = '52d67babf617e0afa44f16bbff7ed7bb80dc4493df4b2f2bb836ab9be3101afc'
+app.config['SECRET_KEY'] = os.getenv("FLASK_KEY")
 ckeditor = CKEditor(app)
 Bootstrap5(app)
 
@@ -38,7 +38,7 @@ loginmanager.init_app(app)
 # CREATE DATABASE
 class Base(DeclarativeBase):
     pass
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///posts.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DB_URI")
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
 
